@@ -1,6 +1,8 @@
-export class Square {
-  constructor(position, mark) {
-    this.position = position
-    this.mark = mark
-  }
-}
+// export class Square {
+//   constructor(position, mark) {
+//     this.position = position
+//     this.mark
+//   }
+// }
+
+

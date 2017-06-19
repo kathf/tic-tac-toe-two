@@ -6,16 +6,17 @@ export class Game {
 
     function displayMark() {
       var squares = store.getState().squares
-      squares.forEach((sq) => {
-        var sqElem = document.getElementById(sq.position)
-        sqElem.innerText = sq.mark
+
+      squares.forEach((sq, i) => {
+        if (!!sq) {
+          var sqElem = document.getElementById(i)
+          sqElem.innerText = sq
+        }
       })
     }
 
     function checkForEndGame() {
       var squares = store.getState().squares
-
-
       //  - check if player won
       //   - render winner
       //  - check if stalemate
@@ -23,16 +24,16 @@ export class Game {
     }
 
     function listenforPlayerMove() {
-      var squareElems = document.getElementsByTagName('td')
-      var squares = Array.from(squareElems)
+      var elems = document.getElementsByTagName('td')
 
-      squares.forEach((sq) => {
-        addEvents(sq)
+      Array.from(elems).forEach((elem) => {
+        addEvents(elem)
       })
     }
 
     function addEvents(element) {
       element.addEventListener('click', storePlayerMove.bind(this))
+      element.addEventListener('click', disableListeners.bind(this))
       element.addEventListener('click', switchPlayer)
     }
 
@@ -44,7 +45,14 @@ export class Game {
       store.dispatch(changePlayer())
     }
 
-    // var grid = new Grid()
+    function disableListeners(event) {
+      var old_element = event.target
+
+      // clone the node to remove all listeners
+      var new_element = old_element.cloneNode(true);
+      old_element.parentNode.replaceChild(new_element, old_element);
+    }
+
     listenforPlayerMove();
     store.subscribe(displayMark);
     store.subscribe(checkForEndGame);

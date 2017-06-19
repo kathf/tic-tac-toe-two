@@ -1,6 +1,6 @@
 import { PLAYER_MOVE, CHANGE_PLAYER } from './actions'
 import { InitialState } from './store/initial_state'
-import { Square } from './store/square'
+// import { Square } from './store/square'
 
 
 const playerSymbol = {
@@ -15,7 +15,8 @@ export function ticTacToe(state = new InitialState, action) {
     case PLAYER_MOVE:
       var newSquares = Object.assign([], state.squares)
       var mark = playerSymbol[state.currentPlayer]
-      newSquares.push(new Square(action.position, mark))
+
+      newSquares[action.position] = mark
 
       return Object.assign({}, state, { squares: newSquares })
 

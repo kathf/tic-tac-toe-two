@@ -4,6 +4,9 @@ table {
 }
 
 td {
+  text-align: center;
+  font-size: 30px;
+  color: white;
   border: blue solid 1px;
   width: 100px;
   height: 100px;

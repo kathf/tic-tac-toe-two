@@ -20,10 +20,10 @@ export function ticTacToe(state = new InitialState, action) {
       return Object.assign({}, state, { squares: newSquares })
 
     case CHANGE_PLAYER:
-      if (state.currentPlayer == 0)
-        var nextPlayer = 1
+      if (state.currentPlayer == 1)
+        var nextPlayer = 2
       else
-        var nextPlayer = 0
+        var nextPlayer = 1
 
       return Object.assign({}, state, { currentPlayer: nextPlayer })
 

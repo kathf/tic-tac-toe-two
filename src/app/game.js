@@ -7,12 +7,19 @@ export class Game {
     function displayMark() {
       var squares = store.getState().squares
       squares.forEach((sq) => {
-        console.log(sq)
+        var sqElem = document.getElementById(sq.position)
+        sqElem.innerText = sq.mark
       })
     }
 
     function checkForEndGame() {
       var squares = store.getState().squares
+
+
+      //  - check if player won
+      //   - render winner
+      //  - check if stalemate
+      //   - render game over
     }
 
     function listenforPlayerMove() {
@@ -20,30 +27,28 @@ export class Game {
       var squares = Array.from(squareElems)
 
       squares.forEach((sq) => {
-        addEvent(sq)
+        addEvents(sq)
       })
     }
 
-    function addEvent(element) {
+    function addEvents(element) {
       element.addEventListener('click', storePlayerMove.bind(this))
+      element.addEventListener('click', switchPlayer)
     }
 
     function storePlayerMove(event) {
       store.dispatch(playerMove(event.target.id))
     }
 
+    function switchPlayer() {
+      store.dispatch(changePlayer())
+    }
+
     // var grid = new Grid()
     listenforPlayerMove();
     store.subscribe(displayMark);
     store.subscribe(checkForEndGame);
-    store.subscribe(changePlayer);
   }
 
 }
 
-
-    //  - UI change to show X or O
-    //  - check if player won
-    //   - render winner
-    //  - check if stalemate
-    //   - render game over

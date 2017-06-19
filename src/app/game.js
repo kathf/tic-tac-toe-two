@@ -40,11 +40,3 @@ export class Game {
     this.store.dispatch(playerMove(event.target.id))
   }
 }
-
-
-
-    //  - UI change to show X or O
-    //  - check if player won
-    //   - render winner
-    //  - check if stalemate
-    //   - render game over

@@ -1,7 +1,7 @@
 const path = require("path");
 
 module.exports = {
-  entry: "./src/index.js",
+  entry: "./src/app/index.js",
   output: {
     filename: "bundle.js",
     path: path.resolve(__dirname, "dist")
@@ -10,7 +10,7 @@ module.exports = {
     rules: [
       {
         test: /\.js$/,
-        include: "/src/",
+        include: "/src/app/",
         use: {
           loader: "babel-loader"
         }
@@ -18,8 +18,7 @@ module.exports = {
     ]
   },
   devServer: {
-    contentBase: "./src",
-    hot: true,
-    publicPath: "./dist"
+    contentBase: "./src/public/",
+    hot: true
   }
 };

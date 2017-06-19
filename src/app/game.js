@@ -3,40 +3,47 @@ import { playerMove, changePlayer } from './actions'
 
 export class Game {
   constructor (store) {
-    this.store = store
+
+    function displayMark() {
+      var squares = store.getState().squares
+      squares.forEach((sq) => {
+        console.log(sq)
+      })
+    }
+
+    function checkForEndGame() {
+      var squares = store.getState().squares
+    }
+
+    function listenforPlayerMove() {
+      var squareElems = document.getElementsByTagName('td')
+      var squares = Array.from(squareElems)
+
+      squares.forEach((sq) => {
+        addEvent(sq)
+      })
+    }
+
+    function addEvent(element) {
+      element.addEventListener('click', storePlayerMove.bind(this))
+    }
+
+    function storePlayerMove(event) {
+      store.dispatch(playerMove(event.target.id))
+    }
 
     // var grid = new Grid()
-    this.listenforPlayerMove(store);
-    store.subscribe(this.displayMark)
-    store.subscribe(this.checkForEndGame)
+    listenforPlayerMove();
+    store.subscribe(displayMark);
+    store.subscribe(checkForEndGame);
     store.subscribe(changePlayer);
   }
 
-  displayMark() {
-    var squares = store.getState().squares
-    squares.forEach((sq) => {
-      console.log(sq)
-    })
-  }
-
-  checkForEndGame() {
-    var squares = store.getState().squares
-  }
-
-  listenforPlayerMove(store) {
-    var squareElems = document.getElementsByTagName('td')
-    var squares = Array.from(squareElems)
-
-    squares.forEach((sq) => {
-      this.addEvent(sq, store)
-    })
-  }
-
-  addEvent(element, store) {
-    element.addEventListener('click', this.storePlayerMove.bind(this))
-  }
-
-  storePlayerMove(event) {
-    this.store.dispatch(playerMove(event.target.id))
-  }
 }
+
+
+    //  - UI change to show X or O
+    //  - check if player won
+    //   - render winner
+    //  - check if stalemate
+    //   - render game over
